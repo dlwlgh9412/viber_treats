@@ -27,7 +27,6 @@ public class MessagePropertyUtils {
         for (ProductListDto.Data data : productListDto.getData()) {
             properties.add(ProductListButtonProperty.createImage(data.getImage()));
             properties.add(ProductListButtonProperty.createContent(data.getName(), data.getBrandName(), data.getAmount().toString()));
-            properties.add(ProductListButtonProperty.createButton(data.getId().toString()));
             properties.add(ProductListButtonProperty.createMoreDetails(data.getId().toString()));
         }
 
