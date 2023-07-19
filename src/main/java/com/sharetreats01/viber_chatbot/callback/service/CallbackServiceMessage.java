@@ -38,6 +38,7 @@ public class CallbackServiceMessage implements CallbackService<CallbackDtoMessag
 
     @Override
     public MessageDtoResponse handleEvent(CallbackDtoMessage request) {
+        log.info("{}", request);
         MessageRequestContext requestContext = MessageRequestContext.create(request.getSender().getId(), chatbotProperties.getBotName(), chatbotProperties.getBotAvatar(), chatbotProperties.getMinApiVersion(), request.getMessage().getText(), request.getMessage().getTrackingData());
         requestContext.setMessageHandlePathKey(messageUtils.extractHandleKey(requestContext.getTrackingData(), requestContext.getInput()));
         MessageHandler messageHandler = handlers.get(requestContext.getMessageHandlePathKey());
