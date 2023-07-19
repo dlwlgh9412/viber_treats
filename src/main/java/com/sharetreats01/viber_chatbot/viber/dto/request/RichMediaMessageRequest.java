@@ -13,14 +13,12 @@ import lombok.ToString;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RichMediaMessageRequest extends MessageRequest {
     private final String type = "rich_media";
-    private final String text;
 
     @JsonProperty("rich_media")
     private ViberRichMediaEntity richMedia;
 
-    public RichMediaMessageRequest(String receiver, String trackingData, Integer minApiVersion, String text, ViberRichMediaEntity richMedia) {
+    public RichMediaMessageRequest(String receiver, String trackingData, Integer minApiVersion, ViberRichMediaEntity richMedia) {
         super(receiver, trackingData, minApiVersion);
-        this.text = text;
         this.richMedia = richMedia;
     }
 }
