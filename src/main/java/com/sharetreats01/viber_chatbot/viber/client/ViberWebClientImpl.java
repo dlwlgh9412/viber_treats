@@ -1,5 +1,6 @@
 package com.sharetreats01.viber_chatbot.viber.client;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sharetreats01.viber_chatbot.viber.dto.request.GetUserDetailsRequest;
 import com.sharetreats01.viber_chatbot.viber.properties.ViberProperties;
 import com.sharetreats01.viber_chatbot.viber.dto.request.MessageRequest;
@@ -17,6 +18,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Component
 @RequiredArgsConstructor
 public class ViberWebClientImpl implements ViberWebClient {
+    private final ObjectMapper objectMapper;
     private final WebClient viberWebClient;
     private final ViberProperties viberProperties;
     private final WebClientResponseResolver responseResolver;
@@ -33,7 +35,11 @@ public class ViberWebClientImpl implements ViberWebClient {
 
     @Override
     public SendMessageResponse sendMessage(MessageRequest request) {
-        log.info("{}", request);
+        try {
+            log.info("{}", objectMapper.writeValueAsString(request));
+        } catch (Exception e) {
+
+        }
         WebClient.ResponseSpec responseSpec = viberWebClient.post().uri(viberProperties.getSendMessageUri())
                 .contentType(MediaType.APPLICATION_JSON)
                 .bodyValue(request)

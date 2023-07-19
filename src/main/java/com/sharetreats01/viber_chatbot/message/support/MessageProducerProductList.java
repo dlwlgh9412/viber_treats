@@ -42,6 +42,6 @@ public class MessageProducerProductList implements MessageProducer {
         List<ViberRichMediaButtonEntity> buttons = MessagePropertyUtils.ConvertToProductsRichMediaButtonList(richMediaButtonEntityRepository.findAllByRichMedia_Id(richMedia.getId()), productListDto);
         richMedia.setButtons(buttons);
 
-        return new RichMediaMessageRequest(context.getReceiverId(), context.getSenderName(), context.getSenderAvatar(), messageUtils.createReplyTrackingData(context.getTrackingData(), getType().name(), context.getInput()), context.getMinApiVersion(), "상품을 선택해주세요", richMedia);
+        return new RichMediaMessageRequest(context.getReceiverId(), messageUtils.createReplyTrackingData(context.getTrackingData(), getType().name(), context.getInput()), context.getMinApiVersion(), "상품을 선택해주세요", richMedia);
     }
 }

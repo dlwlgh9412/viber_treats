@@ -35,6 +35,12 @@ public class MessageRequest {
         this.minApiVersion = minApiVersion;
     }
 
+    public MessageRequest(String receiver, String trackingData, Integer minApiVersion) {
+        this.receiver = receiver;
+        this.trackingData = trackingData;
+        this.minApiVersion = minApiVersion;
+    }
+
     @Getter
     @RequiredArgsConstructor
     @ToString

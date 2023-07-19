@@ -2,7 +2,6 @@ package com.sharetreats01.viber_chatbot.viber.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sharetreats01.viber_chatbot.message.entity.ViberKeyboardEntity;
 import com.sharetreats01.viber_chatbot.message.entity.ViberRichMediaEntity;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -19,14 +18,8 @@ public class RichMediaMessageRequest extends MessageRequest {
     @JsonProperty("rich_media")
     private ViberRichMediaEntity richMedia;
 
-    public RichMediaMessageRequest(String receiver, String senderName, String senderAvatar, Integer minApiVersion, ViberKeyboardEntity keyboard, String trackingData, String text, ViberRichMediaEntity richMedia) {
-        super(receiver, senderName, senderAvatar, minApiVersion, keyboard, trackingData);
-        this.text = text;
-        this.richMedia = richMedia;
-    }
-
-    public RichMediaMessageRequest(String receiver, String senderName, String senderAvatar, String trackingData, Integer minApiVersion, String text, ViberRichMediaEntity richMedia) {
-        super(receiver, senderName, senderAvatar, trackingData, minApiVersion);
+    public RichMediaMessageRequest(String receiver, String trackingData, Integer minApiVersion, String text, ViberRichMediaEntity richMedia) {
+        super(receiver, trackingData, minApiVersion);
         this.text = text;
         this.richMedia = richMedia;
     }
