@@ -29,7 +29,7 @@ public class CallbackServiceSubScribed implements CallbackService<CallbackDtoSub
     public SubscribeDtoResponse handleEvent(CallbackDtoSubscribed request) {
         userService.subscribe(request.getUser().getId());
         MessageProcessContext context = new MessageProcessContext(request.getUser().getId(), chatbotProperties.getBotName(), chatbotProperties.getBotAvatar(), chatbotProperties.getMinApiVersion(), null, null);
-        context.setMessageState(MessageState.NEW);
+        context.setMessageState(MessageState.BRANDS);
         MessageRequest messageRequest = messageService.getMessageRequest(context);
         viberWebClient.sendMessage(messageRequest);
         return null;
