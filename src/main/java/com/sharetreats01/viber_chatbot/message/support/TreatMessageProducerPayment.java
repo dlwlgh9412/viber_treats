@@ -16,7 +16,9 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class TreatMessageProducerPayment implements TreatMessageProducer {
+    private final TreatMessageUtils treatMessageUtils;
     private final ViberKeyboardEntityRepository keyboardEntityRepository;
+
     @Override
     public TreatState getConstantType() {
         return TreatState.PAYMENT;
@@ -27,5 +29,6 @@ public class TreatMessageProducerPayment implements TreatMessageProducer {
         log.info("Message Produce Treat Payment");
         // RichMedia Message
         ViberKeyboardEntity keyboard = keyboardEntityRepository.findTopByMetaDataTypeOrderByCreatedAtDesc(KeyboardType.PAYMENT).orElseThrow();
-        return TextMessageRequest.createWithKeyboard(context.getReceiverId(), context.getSenderName(), context.getSenderAvatar(), context.getMinApiVersion(), keyboard, context.getTrackingData(), "Select Payment Option");    }
+        return TextMessageRequest.createWithKeyboard(context.getReceiverId(), context.getSenderName(), context.getSenderAvatar(), context.getMinApiVersion(), keyboard, treatMessageUtils.pasteInputData(context.getTrackingData(), context.getInput()), "Select Payment Option");
+    }
 }
