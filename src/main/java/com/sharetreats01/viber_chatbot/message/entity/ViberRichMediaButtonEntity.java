@@ -95,7 +95,7 @@ public class ViberRichMediaButtonEntity {
             case CONTENT:
                 return createEntityOnText(property.getTextValues());
             case BUTTON:
-                return createEntityOnButton();
+                return createEntityOnButton(property.getActionBody());
             case DETAIL:
                 return createEntityOnDetail(property.getActionBody());
         }
