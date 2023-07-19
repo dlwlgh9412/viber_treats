@@ -3,6 +3,7 @@ package com.sharetreats01.viber_chatbot.message.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sharetreats01.viber_chatbot.message.dto.ProductDetailButtonProperty;
 import com.sharetreats01.viber_chatbot.message.dto.ProductListButtonProperty;
 import com.sharetreats01.viber_chatbot.message.enums.RichMediaButtonPropertyType;
 import lombok.AccessLevel;
@@ -96,7 +97,24 @@ public class ViberRichMediaButtonEntity {
         return null;
     }
 
+    public ViberRichMediaButtonEntity createEntityOnProductDetailButtonProperty(ProductDetailButtonProperty property) {
+        switch (property.getType()) {
+            case IMAGE:
+                return createEntityOnImage(property);
+            case CONTENT:
+                return createEntityOnText(property);
+            case BUTTON:
+                return createEntityOnActionBody(property);
+        }
+        return null;
+    }
+
     private ViberRichMediaButtonEntity createEntityOnText(ProductListButtonProperty property) {
+        String text = String.format(this.text, property.getTextValues().toArray());
+        return new ViberRichMediaButtonEntity(this.columns, this.rows, this.actionType, this.actionBody, this.image, text, this.textSize, this.textVAlign, this.textHAlign);
+    }
+
+    private ViberRichMediaButtonEntity createEntityOnText(ProductDetailButtonProperty property) {
         String text = String.format(this.text, property.getTextValues().toArray());
         return new ViberRichMediaButtonEntity(this.columns, this.rows, this.actionType, this.actionBody, this.image, text, this.textSize, this.textVAlign, this.textHAlign);
     }
@@ -105,7 +123,15 @@ public class ViberRichMediaButtonEntity {
         return new ViberRichMediaButtonEntity(this.columns, this.rows, this.actionType, property.getActionBody(), this.image, this.text, this.textSize, this.textVAlign, this.textHAlign);
     }
 
+    private ViberRichMediaButtonEntity createEntityOnActionBody(ProductDetailButtonProperty property) {
+        return new ViberRichMediaButtonEntity(this.columns, this.rows, this.actionType, property.getActionBody(), this.image, this.text, this.textSize, this.textVAlign, this.textHAlign);
+    }
+
     private ViberRichMediaButtonEntity createEntityOnImage(ProductListButtonProperty property) {
+        return new ViberRichMediaButtonEntity(this.columns, this.rows, this.actionType, this.actionBody, property.getImage(), this.text, this.textSize, this.textVAlign, this.textHAlign);
+    }
+
+    private ViberRichMediaButtonEntity createEntityOnImage(ProductDetailButtonProperty property) {
         return new ViberRichMediaButtonEntity(this.columns, this.rows, this.actionType, this.actionBody, property.getImage(), this.text, this.textSize, this.textVAlign, this.textHAlign);
     }
 }

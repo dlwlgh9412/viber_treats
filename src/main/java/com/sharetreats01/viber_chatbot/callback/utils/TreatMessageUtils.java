@@ -1,6 +1,7 @@
 package com.sharetreats01.viber_chatbot.callback.utils;
 
 import com.sharetreats01.viber_chatbot.callback.dto.MessageRequestContext;
+import com.sharetreats01.viber_chatbot.callback.enums.MessageState;
 import com.sharetreats01.viber_chatbot.callback.enums.TreatState;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -24,6 +25,7 @@ public class TreatMessageUtils {
     }
 
     public TreatState extractHandleKey(MessageRequestContext context) {
+        if (context.getInput().equals(MessageState.TREAT.name())) return TreatState.FOR;
         String[] parts = context.getTrackingData().split(TRACKING_DELIMITER);
         List<String> treatParts = extractTreatParts(parts[parts.length - 1]);
 

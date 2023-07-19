@@ -1,6 +1,7 @@
 package com.sharetreats01.viber_chatbot.message.util;
 
 import com.sharetreats01.viber_chatbot.message.dto.ButtonPropDto;
+import com.sharetreats01.viber_chatbot.message.dto.ProductDetailButtonProperty;
 import com.sharetreats01.viber_chatbot.message.dto.ProductListButtonProperty;
 import com.sharetreats01.viber_chatbot.message.entity.ViberRichMediaButtonEntity;
 import com.sharetreats01.viber_chatbot.sharetreats.dto.BrandListDto;
@@ -39,7 +40,18 @@ public class MessagePropertyUtils {
         return result;
     }
 
-    public static List<ButtonPropDto> ConvertToButtonsPropDtoList(ProductDetailDto productDetailDto) {
-        return null;
+    public static List<ViberRichMediaButtonEntity> ConvertToProductsRichMediaButtonList(List<ViberRichMediaButtonEntity> buttons, ProductDetailDto productDetailDto) {
+        List<ProductDetailButtonProperty> properties = new ArrayList<>();
+        properties.add(ProductDetailButtonProperty.createImage(productDetailDto.getProductImage()));
+        properties.add(ProductDetailButtonProperty.createContent(productDetailDto.getProductName(), productDetailDto.getAmount().toString()));
+        properties.add(ProductDetailButtonProperty.createButton(productDetailDto.getId().toString()));
+
+        List<ViberRichMediaButtonEntity> result = new ArrayList<>();
+        for (int i = 0; i < properties.size(); i++) {
+            ProductDetailButtonProperty property = properties.get(i);
+            ViberRichMediaButtonEntity button = buttons.get(i % buttons.size());
+            result.add(button.createEntityOnProductDetailButtonProperty(property));
+        }
+        return result;
     }
 }
