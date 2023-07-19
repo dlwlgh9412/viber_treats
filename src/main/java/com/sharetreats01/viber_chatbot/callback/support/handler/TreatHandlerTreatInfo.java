@@ -9,16 +9,16 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class TreatHandlerTreat implements TreatHandler {
+public class TreatHandlerTreatInfo implements TreatHandler {
+
     @Override
     public TreatState getConstantsType() {
-        return TreatState.TREAT;
+        return TreatState.TREAT_INFO;
     }
 
     @Override
     public void handle(MessageRequestContext context) {
-        log.info("Treat Handle");
-        log.info("Treat Handle info: {} {}", context.getTrackingData(), context.getInput());
-        // 결제요청
+        log.info("Treat Treat input: {} tracking: {}", context.getInput(), context.getTrackingData());
+        //
     }
 }

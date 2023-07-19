@@ -12,8 +12,8 @@ public enum TreatState {
     MESSAGE,
     PROMO_CODE,
     PAYMENT,
-    TREAT,
-    TREAT_COMPLETE;
+    TREAT_INFO,
+    TREAT;
 
     public static final Map<String, TreatState> map = new HashMap<>();
 

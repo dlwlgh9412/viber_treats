@@ -1,12 +1,11 @@
 package com.sharetreats01.viber_chatbot.message.util;
 
-import com.sharetreats01.viber_chatbot.message.dto.ButtonPropDto;
-import com.sharetreats01.viber_chatbot.message.dto.ProductDetailButtonProperty;
-import com.sharetreats01.viber_chatbot.message.dto.ProductListButtonProperty;
+import com.sharetreats01.viber_chatbot.message.dto.*;
 import com.sharetreats01.viber_chatbot.message.entity.ViberRichMediaButtonEntity;
 import com.sharetreats01.viber_chatbot.sharetreats.dto.BrandListDto;
 import com.sharetreats01.viber_chatbot.sharetreats.dto.ProductDetailDto;
 import com.sharetreats01.viber_chatbot.sharetreats.dto.ProductListDto;
+import com.sharetreats01.viber_chatbot.sharetreats.dto.TreatFriendDto;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -51,6 +50,26 @@ public class MessagePropertyUtils {
             ProductDetailButtonProperty property = properties.get(i);
             ViberRichMediaButtonEntity button = buttons.get(i % buttons.size());
             result.add(button.createEntityOnProductDetailButtonProperty(property));
+        }
+        return result;
+    }
+
+    public static List<ViberRichMediaButtonEntity> ConvertToTreatFriendRichMediaButtonList(List<ViberRichMediaButtonEntity> buttons, List<TreatFriendProperty> properties) {
+        List<ViberRichMediaButtonEntity> result = new ArrayList<>();
+        for (int i = 0; i < properties.size(); i++) {
+            TreatFriendProperty property = properties.get(i);
+            ViberRichMediaButtonEntity button = buttons.get(i % buttons.size());
+            result.add(button.createEntityOnTreatFriendButtonProperty(property));
+        }
+        return result;
+    }
+
+    public static List<ViberRichMediaButtonEntity> ConvertToTreatMeRichMediaButtonList(List<ViberRichMediaButtonEntity> buttons, List<TreatMeProperty> properties) {
+        List<ViberRichMediaButtonEntity> result = new ArrayList<>();
+        for (int i = 0; i < properties.size(); i++) {
+            TreatMeProperty property = properties.get(i);
+            ViberRichMediaButtonEntity button = buttons.get(i % buttons.size());
+            result.add(button.createEntityOnTreatMeButtonProperty(property));
         }
         return result;
     }

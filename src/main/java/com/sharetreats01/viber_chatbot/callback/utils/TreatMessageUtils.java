@@ -3,6 +3,12 @@ package com.sharetreats01.viber_chatbot.callback.utils;
 import com.sharetreats01.viber_chatbot.callback.dto.MessageRequestContext;
 import com.sharetreats01.viber_chatbot.callback.enums.MessageState;
 import com.sharetreats01.viber_chatbot.callback.enums.TreatState;
+import com.sharetreats01.viber_chatbot.message.dto.TreatFriendProperty;
+import com.sharetreats01.viber_chatbot.message.dto.TreatMeProperty;
+import com.sharetreats01.viber_chatbot.message.enums.RichMediaButtonPropertyType;
+import com.sharetreats01.viber_chatbot.message.enums.RichMediaType;
+import com.sharetreats01.viber_chatbot.sharetreats.dto.ProductDetailDto;
+import com.sharetreats01.viber_chatbot.sharetreats.repository.ShareTreatsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -15,11 +21,39 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class TreatMessageUtils {
     private final Map<TreatState, List<TreatState>> treatPaths;
+    private final ShareTreatsRepository shareTreatsRepository;
     private final String DELIMITER = "_";
     private final String TRACKING_DELIMITER = ":";
     private final String FRIEND = TreatState.FRIEND.name();
     private final String ME = TreatState.ME.name();
 
+    public List<TreatFriendProperty> createTreatFriendPropertyList(String trackingData, String input) {
+        String[] parts = trackingData.split(TRACKING_DELIMITER);
+        List<String> treatParts = extractTreatParts(parts[parts.length - 1]);
+        Long productId = Long.parseLong(parts[3].split(DELIMITER)[1]);
+        ProductDetailDto productDetail = shareTreatsRepository.findProductDetailDtoById(productId);
+        return List.of(
+                TreatFriendProperty.createImage(productDetail.getProductImage()),
+                TreatFriendProperty.createContent(productDetail.getProductName(), productDetail.getAmount().toString(), treatParts.get(2), treatParts.get(3), treatParts.get(4), treatParts.get(5), input),
+                TreatFriendProperty.createButton()
+        );
+    }
+
+    public List<TreatMeProperty> createTreatMePropertyList(String trackingData, String input) {
+        String[] parts = trackingData.split(TRACKING_DELIMITER);
+        List<String> treatParts = extractTreatParts(parts[parts.length - 1]);
+        Long productId = Long.parseLong(parts[3].split(DELIMITER)[1]);
+        ProductDetailDto productDetail = shareTreatsRepository.findProductDetailDtoById(productId);
+        return List.of(
+                TreatMeProperty.createImage(productDetail.getProductImage()),
+                TreatMeProperty.createContent(productDetail.getProductName(), productDetail.getAmount().toString(), treatParts.get(2), treatParts.get(3), input),
+                TreatMeProperty.createButton()
+        );
+    }
+    public RichMediaType extractRichMediaForState(String trackingData) {
+        if (trackingData.contains(FRIEND)) return RichMediaType.TREAT_FRIEND;
+        return RichMediaType.TREAT_ME;
+    }
     public String pasteInputData(String trackingData, String input) {
         return trackingData + DELIMITER + input;
     }
@@ -109,6 +143,5 @@ public class TreatMessageUtils {
         } else {
             return null;
         }
-
     }
 }

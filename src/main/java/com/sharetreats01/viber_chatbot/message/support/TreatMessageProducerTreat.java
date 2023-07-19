@@ -18,8 +18,6 @@ public class TreatMessageProducerTreat implements TreatMessageProducer {
 
     @Override
     public MessageRequest produceMessage(MessageProcessContext context) {
-        log.info("Message Produce Treat");
-        // Rich Media
         return null;
     }
 }
