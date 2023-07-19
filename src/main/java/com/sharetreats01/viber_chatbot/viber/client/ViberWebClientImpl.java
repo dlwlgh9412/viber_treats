@@ -36,7 +36,6 @@ public class ViberWebClientImpl implements ViberWebClient {
     @Override
     public SendMessageResponse sendMessage(MessageRequest request) {
         try {
-            log.info("{}", objectMapper.writeValueAsString(request));
             log.info("{}", request.getTrackingData());
         } catch (Exception e) {
 

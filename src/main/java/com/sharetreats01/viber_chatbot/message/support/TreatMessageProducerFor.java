@@ -28,6 +28,6 @@ public class TreatMessageProducerFor implements TreatMessageProducer {
     public MessageRequest produceMessage(MessageProcessContext context) {
         log.info("Message Produce Treat For");
         ViberKeyboardEntity keyboard = keyboardEntityRepository.findTopByMetaDataTypeOrderByCreatedAtDesc(KeyboardType.FOR).orElseThrow();
-        return TextMessageRequest.createWithKeyboard(context.getReceiverId(), context.getSenderName(), context.getSenderAvatar(), context.getMinApiVersion(), keyboard, treatMessageUtils.removeDetailState(context.getTrackingData()), "Treat 대상을 선택해주세요.");
+        return TextMessageRequest.createWithKeyboard(context.getReceiverId(), context.getSenderName(), context.getSenderAvatar(), context.getMinApiVersion(), keyboard, treatMessageUtils.removeDetailState(context.getTrackingData()), "Select Treat For");
     }
 }
