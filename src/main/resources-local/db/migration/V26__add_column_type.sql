@@ -1,0 +1,1 @@
+alter table tb_viber_rich_media add column rich_media_type varchar(10) default 'rich_media';

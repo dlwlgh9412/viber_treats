@@ -34,6 +34,10 @@ public class ViberRichMediaEntity {
     @Enumerated(EnumType.STRING)
     private RichMediaType metaDataType;
 
+    @JsonProperty("Type")
+    @Column(name = "rich_media_type", length = 10, nullable = false)
+    private String type;
+
     @JsonProperty("ButtonsGroupColumns")
     @Column(name = "buttons_group_columns")
     private Integer buttonsGroupColumns;
