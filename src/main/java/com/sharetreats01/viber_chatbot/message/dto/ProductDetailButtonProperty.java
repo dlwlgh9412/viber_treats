@@ -22,7 +22,7 @@ public class ProductDetailButtonProperty {
         return new ProductDetailButtonProperty(RichMediaButtonPropertyType.CONTENT, List.of(productName, price), null, null);
     }
 
-    public static ProductDetailButtonProperty createButton(String productId) {
-        return new ProductDetailButtonProperty(RichMediaButtonPropertyType.BUTTON, null, productId, null);
+    public static ProductDetailButtonProperty createButton() {
+        return new ProductDetailButtonProperty(RichMediaButtonPropertyType.BUTTON, null, null, null);
     }
 }

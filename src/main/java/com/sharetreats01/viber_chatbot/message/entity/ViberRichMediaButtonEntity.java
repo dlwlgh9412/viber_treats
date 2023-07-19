@@ -91,10 +91,11 @@ public class ViberRichMediaButtonEntity {
             case CONTENT:
                 return createEntityOnText(property);
             case BUTTON:
+                return createEntityOnButton();
             case DETAIL:
-                return createEntityOnActionBody(property);
+                return createEntityOnDetail(property);
         }
-        return null;
+        return this;
     }
 
     public ViberRichMediaButtonEntity createEntityOnProductDetailButtonProperty(ProductDetailButtonProperty property) {
@@ -104,9 +105,9 @@ public class ViberRichMediaButtonEntity {
             case CONTENT:
                 return createEntityOnText(property);
             case BUTTON:
-                return createEntityOnActionBody(property);
+                return createEntityOnButton();
         }
-        return null;
+        return this;
     }
 
     private ViberRichMediaButtonEntity createEntityOnText(ProductListButtonProperty property) {
@@ -119,11 +120,11 @@ public class ViberRichMediaButtonEntity {
         return new ViberRichMediaButtonEntity(this.columns, this.rows, this.actionType, this.actionBody, this.image, text, this.textSize, this.textVAlign, this.textHAlign);
     }
 
-    private ViberRichMediaButtonEntity createEntityOnActionBody(ProductListButtonProperty property) {
-        return new ViberRichMediaButtonEntity(this.columns, this.rows, this.actionType, property.getActionBody(), this.image, this.text, this.textSize, this.textVAlign, this.textHAlign);
+    private ViberRichMediaButtonEntity createEntityOnButton() {
+        return this;
     }
 
-    private ViberRichMediaButtonEntity createEntityOnActionBody(ProductDetailButtonProperty property) {
+    private ViberRichMediaButtonEntity createEntityOnDetail(ProductListButtonProperty property) {
         return new ViberRichMediaButtonEntity(this.columns, this.rows, this.actionType, property.getActionBody(), this.image, this.text, this.textSize, this.textVAlign, this.textHAlign);
     }
 

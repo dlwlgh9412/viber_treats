@@ -24,6 +24,11 @@ public class TreatMessageUtils {
         return trackingData + DELIMITER + input;
     }
 
+    public String removeDetailState(String trackingData) {
+        trackingData = trackingData.replace("DETAIL", "");
+        return trackingData + "TREAT";
+    }
+
     public TreatState extractHandleKey(MessageRequestContext context) {
         if (context.getInput().equals(MessageState.TREAT.name())) return TreatState.FOR;
         String[] parts = context.getTrackingData().split(TRACKING_DELIMITER);

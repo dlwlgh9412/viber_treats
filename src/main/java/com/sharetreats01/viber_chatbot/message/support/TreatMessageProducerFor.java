@@ -1,6 +1,7 @@
 package com.sharetreats01.viber_chatbot.message.support;
 
 import com.sharetreats01.viber_chatbot.callback.enums.TreatState;
+import com.sharetreats01.viber_chatbot.callback.utils.TreatMessageUtils;
 import com.sharetreats01.viber_chatbot.message.dto.MessageProcessContext;
 import com.sharetreats01.viber_chatbot.message.entity.ViberKeyboardEntity;
 import com.sharetreats01.viber_chatbot.message.enums.KeyboardType;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class TreatMessageProducerFor implements TreatMessageProducer {
+    private final TreatMessageUtils treatMessageUtils;
     private final ViberKeyboardEntityRepository keyboardEntityRepository;
     @Override
     public TreatState getConstantType() {
@@ -26,6 +28,6 @@ public class TreatMessageProducerFor implements TreatMessageProducer {
     public MessageRequest produceMessage(MessageProcessContext context) {
         log.info("Message Produce Treat For");
         ViberKeyboardEntity keyboard = keyboardEntityRepository.findTopByMetaDataTypeOrderByCreatedAtDesc(KeyboardType.FOR).orElseThrow();
-        return TextMessageRequest.createWithKeyboard(context.getReceiverId(), context.getSenderName(), context.getSenderAvatar(), context.getMinApiVersion(), keyboard, context.getTrackingData(), "Treat 대상을 선택해주세요.");
+        return TextMessageRequest.createWithKeyboard(context.getReceiverId(), context.getSenderName(), context.getSenderAvatar(), context.getMinApiVersion(), keyboard, treatMessageUtils.removeDetailState(context.getTrackingData()), "Treat 대상을 선택해주세요.");
     }
 }

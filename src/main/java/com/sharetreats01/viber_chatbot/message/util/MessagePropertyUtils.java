@@ -27,6 +27,7 @@ public class MessagePropertyUtils {
         for (ProductListDto.Data data : productListDto.getData()) {
             properties.add(ProductListButtonProperty.createImage(data.getImage()));
             properties.add(ProductListButtonProperty.createContent(data.getName(), data.getBrandName(), data.getAmount().toString()));
+            properties.add(ProductListButtonProperty.createButton());
             properties.add(ProductListButtonProperty.createMoreDetails(data.getId().toString()));
         }
 
@@ -43,6 +44,7 @@ public class MessagePropertyUtils {
         List<ProductDetailButtonProperty> properties = new ArrayList<>();
         properties.add(ProductDetailButtonProperty.createImage(productDetailDto.getProductImage()));
         properties.add(ProductDetailButtonProperty.createContent(productDetailDto.getProductName(), productDetailDto.getAmount().toString()));
+        properties.add(ProductDetailButtonProperty.createButton());
 
         List<ViberRichMediaButtonEntity> result = new ArrayList<>();
         for (int i = 0; i < properties.size(); i++) {
