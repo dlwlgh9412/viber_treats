@@ -17,6 +17,7 @@ public class MessageUtils {
     private final String INPUT_DELIMITER = "_";
     private final String TREAT_STATE = MessageState.TREAT.name();
     private final String NEW = MessageState.NEW.name();
+    private final String PRODUCTS = MessageState.PRODUCTS.name();
 
 
     public String createSession() {
@@ -61,6 +62,8 @@ public class MessageUtils {
     }
 
     public String createReplyTrackingData(String trackingData, String state, String input) {
+        if (trackingData.split(DELIMITER).length == 2 && state.equals(PRODUCTS))
+            return trackingData + DELIMITER + state + INPUT_DELIMITER + input;
         return trackingData + INPUT_DELIMITER + input + DELIMITER + state;
     }
 }
