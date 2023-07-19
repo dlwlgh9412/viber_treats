@@ -37,6 +37,6 @@ public class MessageProducerBrand implements MessageProducer {
         List<ButtonPropDto> dtoList = MessagePropertyUtils.ConvertToButtonsPropDtoList(brandListDto);
         ViberKeyboardEntity keyboard = keyboardEntityRepository.findTopByMetaDataTypeOrderByCreatedAtDesc(KeyboardType.BRAND).orElseThrow();
         keyboard.setBrandKeyboardButtonsProp(dtoList);
-        return TextMessageRequest.createWithKeyboard(context.getReceiverId(), context.getSenderName(), context.getSenderAvatar(), context.getMinApiVersion(), keyboard, messageUtils.createTrackingData(), "브랜드를 선택해주세요.");
+        return TextMessageRequest.createWithKeyboard(context.getReceiverId(), context.getSenderName(), context.getSenderAvatar(), context.getMinApiVersion(), keyboard, messageUtils.createTrackingData(), "select brand");
     }
 }

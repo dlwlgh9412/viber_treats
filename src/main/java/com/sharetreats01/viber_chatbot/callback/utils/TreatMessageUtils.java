@@ -30,7 +30,7 @@ public class TreatMessageUtils {
     public List<TreatFriendProperty> createTreatFriendPropertyList(String trackingData, String input) {
         String[] parts = trackingData.split(TRACKING_DELIMITER);
         List<String> treatParts = extractTreatParts(parts[parts.length - 1]);
-        Long productId = Long.parseLong(parts[3].split(DELIMITER)[1]);
+        Long productId = Long.parseLong(parts[2].split(DELIMITER)[1]);
         ProductDetailDto productDetail = shareTreatsRepository.findProductDetailDtoById(productId);
         return List.of(
                 TreatFriendProperty.createImage(productDetail.getProductImage()),
@@ -39,10 +39,22 @@ public class TreatMessageUtils {
         );
     }
 
+    public List<TreatFriendProperty> createTreatFriendPropertyList(String trackingData) {
+        String[] parts = trackingData.split(TRACKING_DELIMITER);
+        List<String> treatParts = extractTreatParts(parts[parts.length - 1]);
+        Long productId = Long.parseLong(parts[2].split(DELIMITER)[1]);
+        ProductDetailDto productDetail = shareTreatsRepository.findProductDetailDtoById(productId);
+        return List.of(
+                TreatFriendProperty.createImage(productDetail.getProductImage()),
+                TreatFriendProperty.createContent(productDetail.getProductName(), productDetail.getAmount().toString(), treatParts.get(2), treatParts.get(3), treatParts.get(4), treatParts.get(5), treatParts.get(6)),
+                TreatFriendProperty.createButton()
+        );
+    }
+
     public List<TreatMeProperty> createTreatMePropertyList(String trackingData, String input) {
         String[] parts = trackingData.split(TRACKING_DELIMITER);
         List<String> treatParts = extractTreatParts(parts[parts.length - 1]);
-        Long productId = Long.parseLong(parts[3].split(DELIMITER)[1]);
+        Long productId = Long.parseLong(parts[2].split(DELIMITER)[1]);
         ProductDetailDto productDetail = shareTreatsRepository.findProductDetailDtoById(productId);
         return List.of(
                 TreatMeProperty.createImage(productDetail.getProductImage()),
@@ -50,9 +62,26 @@ public class TreatMessageUtils {
                 TreatMeProperty.createButton()
         );
     }
+
+    public List<TreatMeProperty> createTreatMePropertyList(String trackingData) {
+        String[] parts = trackingData.split(TRACKING_DELIMITER);
+        List<String> treatParts = extractTreatParts(parts[parts.length - 1]);
+        Long productId = Long.parseLong(parts[2].split(DELIMITER)[1]);
+        ProductDetailDto productDetail = shareTreatsRepository.findProductDetailDtoById(productId);
+        return List.of(
+                TreatMeProperty.createImage(productDetail.getProductImage()),
+                TreatMeProperty.createContent(productDetail.getProductName(), productDetail.getAmount().toString(), treatParts.get(2), treatParts.get(3), treatParts.get(4)),
+                TreatMeProperty.createButton()
+        );
+    }
     public RichMediaType extractRichMediaForState(String trackingData) {
         if (trackingData.contains(FRIEND)) return RichMediaType.TREAT_FRIEND;
         return RichMediaType.TREAT_ME;
+    }
+
+    public RichMediaType extractRichMediaForTreatComp(String trackingData) {
+        if (trackingData.contains(FRIEND)) return RichMediaType.TREAT_COMP_FRIEND;
+        return RichMediaType.TREAT_COMP_ME;
     }
     public String pasteInputData(String trackingData, String input) {
         return trackingData + DELIMITER + input;

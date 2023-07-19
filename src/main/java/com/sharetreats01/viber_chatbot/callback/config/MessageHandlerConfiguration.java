@@ -44,8 +44,8 @@ public class MessageHandlerConfiguration {
     @Bean
     public Map<TreatState, List<TreatState>> treatMessagePath() {
         Map<TreatState, List<TreatState>> treatPath = new HashMap<>();
-        treatPath.put(TreatState.ME, Arrays.asList(TreatState.YOUR_INFO, TreatState.PROMO_CODE, TreatState.PAYMENT, TreatState.TREAT_INFO));
-        treatPath.put(TreatState.FRIEND, Arrays.asList(TreatState.RECIPIENT, TreatState.YOUR_INFO, TreatState.MESSAGE, TreatState.PROMO_CODE, TreatState.PAYMENT, TreatState.TREAT_INFO));
+        treatPath.put(TreatState.ME, Arrays.asList(TreatState.YOUR_INFO, TreatState.PROMO_CODE, TreatState.PAYMENT, TreatState.TREAT_INFO, TreatState.TREAT));
+        treatPath.put(TreatState.FRIEND, Arrays.asList(TreatState.RECIPIENT, TreatState.YOUR_INFO, TreatState.MESSAGE, TreatState.PROMO_CODE, TreatState.PAYMENT, TreatState.TREAT_INFO, TreatState.TREAT));
         return treatPath;
     }
 }

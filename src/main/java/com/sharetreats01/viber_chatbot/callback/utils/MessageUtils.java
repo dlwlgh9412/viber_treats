@@ -16,6 +16,7 @@ public class MessageUtils {
     private final String DELIMITER = ":";
     private final String INPUT_DELIMITER = "_";
     private final String TREAT_STATE = MessageState.TREAT.name();
+    private final String NEW = MessageState.NEW.name();
 
 
     public String createSession() {
@@ -27,7 +28,7 @@ public class MessageUtils {
     }
 
     public MessageState extractHandleKey(String trackingData, String input) {
-        if (!StringUtils.hasText(trackingData)) return MessageState.NEW;
+        if (!StringUtils.hasText(trackingData) || input.equals(NEW)) return MessageState.NEW;
         if (isTreatProcess(trackingData, input)) return MessageState.TREAT;
 
         String[] parts = trackingData.split(DELIMITER);
@@ -48,7 +49,7 @@ public class MessageUtils {
     public MessageState extractMessageKey(String trackingData, String input) {
         if (input != null && input.contains(TREAT_STATE)) return null;
 
-        if (!StringUtils.hasText(trackingData)) return MessageState.BRANDS;
+        if (!StringUtils.hasText(trackingData) || StringUtils.hasText(input) && input.equals(NEW)) return MessageState.BRANDS;
         return extractHandleKey(trackingData, input);
     }
 

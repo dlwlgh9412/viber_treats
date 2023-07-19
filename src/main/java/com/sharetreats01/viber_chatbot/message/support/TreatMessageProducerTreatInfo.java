@@ -11,6 +11,7 @@ import com.sharetreats01.viber_chatbot.message.repository.ViberRichMediaButtonEn
 import com.sharetreats01.viber_chatbot.message.repository.ViberRichMediaEntityRepository;
 import com.sharetreats01.viber_chatbot.message.util.MessagePropertyUtils;
 import com.sharetreats01.viber_chatbot.viber.dto.request.MessageRequest;
+import com.sharetreats01.viber_chatbot.viber.dto.request.RichMediaMessageRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -44,6 +45,6 @@ public class TreatMessageProducerTreatInfo implements TreatMessageProducer {
         }
 
         richMedia.setButtons(buttons);
-        return null;
+        return new RichMediaMessageRequest(context.getReceiverId(), context.getTrackingData(), context.getMinApiVersion(), richMedia);
     }
 }
