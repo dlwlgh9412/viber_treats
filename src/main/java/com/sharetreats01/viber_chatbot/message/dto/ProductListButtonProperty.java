@@ -22,8 +22,8 @@ public class ProductListButtonProperty {
         return new ProductListButtonProperty(RichMediaButtonPropertyType.CONTENT, List.of(productName, brandName, price), null, null);
     }
 
-    public static ProductListButtonProperty createButton() {
-        return new ProductListButtonProperty(RichMediaButtonPropertyType.BUTTON, null, null, null);
+    public static ProductListButtonProperty createButton(Long id) {
+        return new ProductListButtonProperty(RichMediaButtonPropertyType.BUTTON, null, id + "_TREAT", null);
     }
 
     public static ProductListButtonProperty createMoreDetails(String productId) {

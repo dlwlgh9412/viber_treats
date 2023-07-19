@@ -27,7 +27,7 @@ public class MessageRequestContext {
         this.trackingData = trackingData;
     }
 
-    public static MessageRequestContext create(String receiverId, String senderName, String senderAvatar, Integer minApiVersion, String input, String trackingData) {
+    public static MessageRequestContext create(String receiverId, String senderName, String senderAvatar, Integer minApiVersion, String trackingData, String input) {
         return new MessageRequestContext(receiverId, senderName, senderAvatar, minApiVersion, input, trackingData);
     }
 }

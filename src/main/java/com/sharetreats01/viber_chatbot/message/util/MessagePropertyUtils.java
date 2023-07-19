@@ -5,7 +5,6 @@ import com.sharetreats01.viber_chatbot.message.entity.ViberRichMediaButtonEntity
 import com.sharetreats01.viber_chatbot.sharetreats.dto.BrandListDto;
 import com.sharetreats01.viber_chatbot.sharetreats.dto.ProductDetailDto;
 import com.sharetreats01.viber_chatbot.sharetreats.dto.ProductListDto;
-import com.sharetreats01.viber_chatbot.sharetreats.dto.TreatFriendDto;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -21,12 +20,12 @@ public class MessagePropertyUtils {
                 .collect(Collectors.toList());
     }
 
-    public static List<ViberRichMediaButtonEntity> ConvertToProductDetailRichMediaButtonList(List<ViberRichMediaButtonEntity> buttons, ProductListDto productListDto) {
+    public static List<ViberRichMediaButtonEntity> ConvertToProductListRichMediaButtonList(List<ViberRichMediaButtonEntity> buttons, ProductListDto productListDto) {
         List<ProductListButtonProperty> properties = new ArrayList<>();
         for (ProductListDto.Data data : productListDto.getData()) {
             properties.add(ProductListButtonProperty.createImage(data.getImage()));
             properties.add(ProductListButtonProperty.createContent(data.getName(), data.getBrandName(), data.getAmount().toString()));
-            properties.add(ProductListButtonProperty.createButton());
+            properties.add(ProductListButtonProperty.createButton(data.getId()));
             properties.add(ProductListButtonProperty.createMoreDetails(data.getId().toString()));
         }
 

@@ -19,6 +19,21 @@ public class MessageUtils {
     private final String NEW = MessageState.NEW.name();
     private final String PRODUCTS = MessageState.PRODUCTS.name();
 
+    public String processSendTreatTrackingData(String trackingData, String input) {
+        if (input.contains(INPUT_DELIMITER)) {
+            String[] parts = input.split(INPUT_DELIMITER);
+            return trackingData + INPUT_DELIMITER + parts[0];
+        }
+        return trackingData;
+    }
+
+    public String processSendTreatInput(String input) {
+        if (input.contains(INPUT_DELIMITER)) {
+            String[] parts = input.split(INPUT_DELIMITER);
+            return parts[1];
+        }
+        return input;
+    }
 
     public String createSession() {
         return uuidGenerator.createTimeBasedUUID().toString();
@@ -61,9 +76,8 @@ public class MessageUtils {
         return parts[parts.length - 1].startsWith(TREAT_STATE);
     }
 
+
     public String createReplyTrackingData(String trackingData, String state, String input) {
-//        if (trackingData.split(DELIMITER).length == 2 && state.equals(PRODUCTS))
-//            return trackingData + DELIMITER + state + INPUT_DELIMITER + input;
         return trackingData + INPUT_DELIMITER + input + DELIMITER + state;
     }
 }

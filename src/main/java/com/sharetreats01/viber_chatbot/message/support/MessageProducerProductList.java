@@ -39,7 +39,7 @@ public class MessageProducerProductList implements MessageProducer {
         log.info("Message Produce Product List");
         ProductListDto productListDto = shareTreatsService.getProductListDtoByBrandId(Long.parseLong(context.getInput()));
         ViberRichMediaEntity richMedia = richMediaEntityRepository.findTopByMetaDataTypeOrderByCreatedAtDesc(RichMediaType.PRODUCT_LIST).orElseThrow();
-        List<ViberRichMediaButtonEntity> buttons = MessagePropertyUtils.ConvertToProductDetailRichMediaButtonList(richMediaButtonEntityRepository.findAllByRichMedia_Id(richMedia.getId()), productListDto);
+        List<ViberRichMediaButtonEntity> buttons = MessagePropertyUtils.ConvertToProductListRichMediaButtonList(richMediaButtonEntityRepository.findAllByRichMedia_Id(richMedia.getId()), productListDto);
         richMedia.setButtons(buttons);
 
         return new RichMediaMessageRequest(context.getReceiverId(), messageUtils.createReplyTrackingData(context.getTrackingData(), getType().name(), context.getInput()), context.getMinApiVersion(), richMedia);
