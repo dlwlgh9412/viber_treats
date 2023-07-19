@@ -4,7 +4,7 @@ import lombok.*;
 
 import java.util.List;
 
-@Data
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class ProductListDto {
@@ -13,12 +13,16 @@ public class ProductListDto {
     @Getter
     @NoArgsConstructor(access = AccessLevel.PRIVATE)
     public static class Data {
+        private Long id;
         private String name;
+        private String brandName;
         private Integer amount;
         private String image;
 
-        public Data(String name, Integer amount, String image) {
+        public Data(Long id, String name, String brandName, Integer amount, String image) {
+            this.id = id;
             this.name = name;
+            this.brandName = brandName;
             this.amount = amount;
             this.image = image;
         }

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Entity
@@ -64,8 +65,8 @@ public class ViberKeyboardButtonEntity {
     @JsonProperty("Image")
     private String image;
 
-    public void setText(String text) {
-        this.text = String.format(this.text, text);
+    public void setText(List<String> values) {
+        this.text = String.format(this.text, values.toArray());
     }
 
     public void setActionBody(String actionBody) {

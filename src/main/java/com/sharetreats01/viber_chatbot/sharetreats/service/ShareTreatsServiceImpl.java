@@ -22,12 +22,12 @@ public class ShareTreatsServiceImpl implements ShareTreatsService {
     }
 
     @Override
-    public ProductListDto getProductListDtoByBrandId(String brandId) {
+    public ProductListDto getProductListDtoByBrandId(Long brandId) {
         return repository.findProductListDtoByBrandId(brandId);
     }
 
     @Override
-    public ProductDetailDto getProductDetailDtoByProductId(String productId) {
+    public ProductDetailDto getProductDetailDtoByProductId(Long productId) {
         return repository.findProductDetailDtoById(productId);
     }
 }

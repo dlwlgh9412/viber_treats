@@ -7,7 +7,7 @@ import com.sharetreats01.viber_chatbot.message.dto.MessageProcessContext;
 import com.sharetreats01.viber_chatbot.message.entity.ViberKeyboardEntity;
 import com.sharetreats01.viber_chatbot.message.enums.KeyboardType;
 import com.sharetreats01.viber_chatbot.message.repository.ViberKeyboardEntityRepository;
-import com.sharetreats01.viber_chatbot.message.util.MessagePropUtils;
+import com.sharetreats01.viber_chatbot.message.util.MessagePropertyUtils;
 import com.sharetreats01.viber_chatbot.sharetreats.dto.BrandListDto;
 import com.sharetreats01.viber_chatbot.sharetreats.service.ShareTreatsService;
 import com.sharetreats01.viber_chatbot.viber.dto.request.MessageRequest;
@@ -34,7 +34,7 @@ public class MessageProducerBrand implements MessageProducer {
     public MessageRequest produceMessage(MessageProcessContext context) {
         log.info("MessageProduce Brand List");
         BrandListDto brandListDto = shareTreatsService.getBrandListDto();
-        List<ButtonPropDto> dtoList = MessagePropUtils.ConvertToButtonsPropDtoList(brandListDto);
+        List<ButtonPropDto> dtoList = MessagePropertyUtils.ConvertToButtonsPropDtoList(brandListDto);
         ViberKeyboardEntity keyboard = keyboardEntityRepository.findTopByMetaDataTypeOrderByCreatedAtDesc(KeyboardType.BRAND).orElseThrow();
         keyboard.setBrandKeyboardButtonsProp(dtoList);
         return TextMessageRequest.createWithKeyboard(context.getReceiverId(), context.getSenderName(), context.getSenderAvatar(), context.getMinApiVersion(), keyboard, messageUtils.createTrackingData(), "브랜드를 선택해주세요.");

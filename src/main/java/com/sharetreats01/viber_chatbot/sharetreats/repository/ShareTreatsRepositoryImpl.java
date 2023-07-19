@@ -25,9 +25,9 @@ public class ShareTreatsRepositoryImpl implements ShareTreatsRepository {
     }
 
     @Override
-    public ProductListDto findProductListDtoByBrandId(String brandId) {
+    public ProductListDto findProductListDtoByBrandId(Long brandId) {
         List<ProductListDto.Data> result = em.createQuery(
-                        "select new com.sharetreats01.viber_chatbot.sharetreats.dto.ProductListDto$Data(p.productName, p.amount, p.productImage) " +
+                        "select new com.sharetreats01.viber_chatbot.sharetreats.dto.ProductListDto$Data(p.id, p.productName, p.brand.brandName, p.amount, p.productImage) " +
                                 "from ProductEntity p " +
                                 "where p.brand.id =: brandId",
                         ProductListDto.Data.class)
@@ -36,9 +36,9 @@ public class ShareTreatsRepositoryImpl implements ShareTreatsRepository {
     }
 
     @Override
-    public ProductDetailDto findProductDetailDtoById(String productId) {
+    public ProductDetailDto findProductDetailDtoById(Long productId) {
         return em.createQuery(
-                        "select new com.sharetreats01.viber_chatbot.sharetreats.dto.ProductDetailDto(p.productName, p.productImage, p.brand.id, p.amount) " +
+                        "select new com.sharetreats01.viber_chatbot.sharetreats.dto.ProductDetailDto(p.id, p.productName, p.productImage, p.brand.id, p.amount) " +
                                 "from ProductEntity p " +
                                 "where p.id =: productId",
                         ProductDetailDto.class)

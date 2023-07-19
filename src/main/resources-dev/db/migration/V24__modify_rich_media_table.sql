@@ -1,0 +1,1 @@
+alter table tb_viber_rich_media_button add column button_prop varchar(20);

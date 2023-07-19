@@ -3,7 +3,6 @@ package com.sharetreats01.viber_chatbot.message.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.sharetreats01.viber_chatbot.message.dto.ButtonPropDto;
 import com.sharetreats01.viber_chatbot.message.enums.RichMediaType;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -12,10 +11,7 @@ import lombok.ToString;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 @Getter
 @Entity
@@ -50,34 +46,15 @@ public class ViberRichMediaEntity {
     @Column(name = "bg_color")
     private String bgColor;
 
+    @Transient
     @JsonProperty("Buttons")
-    @OneToMany(mappedBy = "richMedia", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ViberRichMediaButtonEntity> buttons = new ArrayList<>();
+    private List<ViberRichMediaButtonEntity> buttons;
 
     @JsonIgnore
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    protected ViberRichMediaEntity(String description, RichMediaType metaDataType, Integer buttonsGroupColumns, Integer buttonsGroupRows, String bgColor, LocalDateTime createdAt) {
-        this.description = description;
-        this.metaDataType = metaDataType;
-        this.buttonsGroupColumns = buttonsGroupColumns;
-        this.buttonsGroupRows = buttonsGroupRows;
-        this.bgColor = bgColor;
-        this.createdAt = createdAt;
-    }
-
-    public void setProductListRichMediaButtonsProp(List<ButtonPropDto> props) {
-        buttons = IntStream.range(0, buttons.size())
-                .filter(index -> index < props.size())
-                .mapToObj(i -> {
-                    ViberRichMediaButtonEntity button = buttons.get(i);
-                    ButtonPropDto prop = props.get(i);
-                    button.setText(prop.getText());
-                    button.setActionBody(prop.getActionBody());
-                    button.setImage(prop.getImage());
-                    return button;
-                })
-                .collect(Collectors.toList());
+    public void setButtons(List<ViberRichMediaButtonEntity> buttons) {
+        this.buttons = buttons;
     }
 }

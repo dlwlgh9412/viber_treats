@@ -6,7 +6,7 @@ import com.sharetreats01.viber_chatbot.sharetreats.dto.ProductListDto;
 
 public interface ShareTreatsRepository {
     BrandListDto findBrandListDto();
-    ProductListDto findProductListDtoByBrandId(String brandId);
+    ProductListDto findProductListDtoByBrandId(Long brandId);
 
-    ProductDetailDto findProductDetailDtoById(String productId);
+    ProductDetailDto findProductDetailDtoById(Long productId);
 }

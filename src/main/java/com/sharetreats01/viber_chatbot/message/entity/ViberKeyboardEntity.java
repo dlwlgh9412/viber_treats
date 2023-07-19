@@ -80,7 +80,7 @@ public class ViberKeyboardEntity {
                 .mapToObj(i -> {
                     ViberKeyboardButtonEntity button = buttons.get(i);
                     ButtonPropDto prop = props.get(i);
-                    button.setText(prop.getText());
+                    button.setText(prop.getTextValues());
                     button.setActionBody(prop.getActionBody());
                     button.setImage(prop.getImage());
                     return button;
