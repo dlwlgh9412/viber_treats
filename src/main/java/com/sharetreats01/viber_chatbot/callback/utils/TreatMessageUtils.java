@@ -88,7 +88,7 @@ public class TreatMessageUtils {
     }
 
     public String removeDetailState(String trackingData) {
-        trackingData = trackingData.replace("DETAIL", "");
+        trackingData = trackingData.replace(":DETAIL", "");
         return trackingData + TRACKING_DELIMITER + "TREAT";
     }
 
