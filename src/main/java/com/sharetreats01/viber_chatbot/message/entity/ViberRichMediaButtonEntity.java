@@ -136,6 +136,9 @@ public class ViberRichMediaButtonEntity {
         return new ViberRichMediaButtonEntity(this.columns, this.rows, this.actionType, this.actionBody, this.image, text, this.textSize, this.textVAlign, this.textHAlign);
     }
 
+    private ViberRichMediaButtonEntity createEntityOnButton(String actionBody) {
+        return new ViberRichMediaButtonEntity(this.columns, this.rows, this.actionType, actionBody, this.image, this.text, this.textSize, this.textVAlign, this.textHAlign);
+    }
     private ViberRichMediaButtonEntity createEntityOnButton() {
         return this;
     }
