@@ -1,0 +1,18 @@
+{
+  "event": "message",
+  "timestamp": 1457764197627,
+  "message_token": 4912661846655238145,
+  "sender": {
+    "id": "01234567890A=",
+    "name": "John McClane",
+    "avatar": "http://avatar.example.com",
+    "country": "UK",
+    "language": "en",
+    "api_version": 1
+  },
+  "message": {
+    "type": "text",
+    "text": "BigMc_TREAT",
+    "tracking_data" : "11ee1982-1bef-3bc7-8664-cf1e0bd45cbf:BRANDS_1:PRODUCTS"
+  }
+}

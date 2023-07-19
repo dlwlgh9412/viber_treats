@@ -1,0 +1,1 @@
+alter table tb_viber_rich_media add column  bg_color varchar(10);

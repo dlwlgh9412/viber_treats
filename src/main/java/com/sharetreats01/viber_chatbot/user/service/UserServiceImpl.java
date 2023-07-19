@@ -1,11 +1,11 @@
 package com.sharetreats01.viber_chatbot.user.service;
 
-import com.sharetreats01.viber_chatbot.exception.UserNotFoundException;
-import com.sharetreats01.viber_chatbot.user.entity.UserEntity;
+import com.sharetreats01.viber_chatbot.common.exception.UserNotFoundException;
 import com.sharetreats01.viber_chatbot.user.repository.UserRepository;
-import com.sharetreats01.viber_chatbot.infra.viber.client.ViberWebClient;
-import com.sharetreats01.viber_chatbot.infra.viber.dto.request.GetUserDetailsRequest;
-import com.sharetreats01.viber_chatbot.infra.viber.dto.response.GetUserDetailsResponse;
+import com.sharetreats01.viber_chatbot.user.entity.UserEntity;
+import com.sharetreats01.viber_chatbot.viber.client.ViberWebClient;
+import com.sharetreats01.viber_chatbot.viber.dto.request.GetUserDetailsRequest;
+import com.sharetreats01.viber_chatbot.viber.dto.response.GetUserDetailsResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
