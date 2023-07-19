@@ -10,7 +10,6 @@ import com.sharetreats01.viber_chatbot.message.repository.ViberRichMediaButtonEn
 import com.sharetreats01.viber_chatbot.message.repository.ViberRichMediaEntityRepository;
 import com.sharetreats01.viber_chatbot.message.util.MessagePropertyUtils;
 import com.sharetreats01.viber_chatbot.sharetreats.dto.ProductDetailDto;
-import com.sharetreats01.viber_chatbot.sharetreats.dto.ProductListDto;
 import com.sharetreats01.viber_chatbot.sharetreats.service.ShareTreatsService;
 import com.sharetreats01.viber_chatbot.viber.dto.request.MessageRequest;
 import com.sharetreats01.viber_chatbot.viber.dto.request.RichMediaMessageRequest;
@@ -38,7 +37,7 @@ public class MessageProducerProductDetail implements MessageProducer {
         log.info("Message Produce Product Detail");
         ProductDetailDto productDetailDto = shareTreatsService.getProductDetailDtoByProductId(Long.parseLong(context.getInput()));
         ViberRichMediaEntity richMedia = richMediaEntityRepository.findTopByMetaDataTypeOrderByCreatedAtDesc(RichMediaType.PRODUCT_DETAIL).orElseThrow();
-        List<ViberRichMediaButtonEntity> buttons = MessagePropertyUtils.ConvertToProductsRichMediaButtonList(richMediaButtonEntityRepository.findAllByRichMedia_Id(richMedia.getId()), productDetailDto);
+        List<ViberRichMediaButtonEntity> buttons = MessagePropertyUtils.ConvertToProductDetailRichMediaButtonList(richMediaButtonEntityRepository.findAllByRichMedia_Id(richMedia.getId()), productDetailDto);
         richMedia.setButtons(buttons);
 
         return new RichMediaMessageRequest(context.getReceiverId(), messageUtils.createReplyTrackingData(context.getTrackingData(), getType().name(), context.getInput()), context.getMinApiVersion(), richMedia);    }

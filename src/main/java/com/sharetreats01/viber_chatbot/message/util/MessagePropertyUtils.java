@@ -22,7 +22,7 @@ public class MessagePropertyUtils {
                 .collect(Collectors.toList());
     }
 
-    public static List<ViberRichMediaButtonEntity> ConvertToProductsRichMediaButtonList(List<ViberRichMediaButtonEntity> buttons, ProductListDto productListDto) {
+    public static List<ViberRichMediaButtonEntity> ConvertToProductDetailRichMediaButtonList(List<ViberRichMediaButtonEntity> buttons, ProductListDto productListDto) {
         List<ProductListButtonProperty> properties = new ArrayList<>();
         for (ProductListDto.Data data : productListDto.getData()) {
             properties.add(ProductListButtonProperty.createImage(data.getImage()));
@@ -40,11 +40,10 @@ public class MessagePropertyUtils {
         return result;
     }
 
-    public static List<ViberRichMediaButtonEntity> ConvertToProductsRichMediaButtonList(List<ViberRichMediaButtonEntity> buttons, ProductDetailDto productDetailDto) {
+    public static List<ViberRichMediaButtonEntity> ConvertToProductDetailRichMediaButtonList(List<ViberRichMediaButtonEntity> buttons, ProductDetailDto productDetailDto) {
         List<ProductDetailButtonProperty> properties = new ArrayList<>();
         properties.add(ProductDetailButtonProperty.createImage(productDetailDto.getProductImage()));
         properties.add(ProductDetailButtonProperty.createContent(productDetailDto.getProductName(), productDetailDto.getAmount().toString()));
-        properties.add(ProductDetailButtonProperty.createButton(productDetailDto.getId().toString()));
 
         List<ViberRichMediaButtonEntity> result = new ArrayList<>();
         for (int i = 0; i < properties.size(); i++) {
