@@ -43,5 +43,5 @@ public class TreatMessageProducerTreat implements TreatMessageProducer {
         }
 
         richMedia.setButtons(buttons);
-        return new RichMediaMessageRequest(context.getReceiverId(), context.getTrackingData(), context.getMinApiVersion(), richMedia);    }
+        return new RichMediaMessageRequest(context.getReceiverId(), treatMessageUtils.pasteInputData(context.getTrackingData(), context.getInput()), context.getMinApiVersion(), richMedia);    }
 }
