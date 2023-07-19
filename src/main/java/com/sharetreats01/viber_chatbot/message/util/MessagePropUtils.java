@@ -12,10 +12,9 @@ import java.util.stream.Collectors;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MessagePropUtils {
-    private static final String DELIMITER = "_";
     public static List<ButtonPropDto> ConvertToButtonsPropDtoList(BrandListDto brandListDto) {
         return brandListDto.getData().stream()
-                .map(dto -> new ButtonPropDto(dto.getName(), dto.getName() + DELIMITER + dto.getId(), dto.getImage()))
+                .map(dto -> new ButtonPropDto(dto.getName(), dto.getId().toString(), dto.getImage()))
                 .collect(Collectors.toList());
     }
 

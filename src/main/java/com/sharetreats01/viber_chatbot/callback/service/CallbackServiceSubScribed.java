@@ -2,6 +2,7 @@ package com.sharetreats01.viber_chatbot.callback.service;
 
 import com.sharetreats01.viber_chatbot.callback.dto.callback.request.CallbackDtoSubscribed;
 import com.sharetreats01.viber_chatbot.callback.dto.callback.response.SubscribeDtoResponse;
+import com.sharetreats01.viber_chatbot.callback.enums.MessageState;
 import com.sharetreats01.viber_chatbot.common.properties.ChatbotProperties;
 import com.sharetreats01.viber_chatbot.message.dto.MessageProcessContext;
 import com.sharetreats01.viber_chatbot.message.service.MessageService;
@@ -28,6 +29,7 @@ public class CallbackServiceSubScribed implements CallbackService<CallbackDtoSub
     public SubscribeDtoResponse handleEvent(CallbackDtoSubscribed request) {
         userService.subscribe(request.getUser().getId());
         MessageProcessContext context = new MessageProcessContext(request.getUser().getId(), chatbotProperties.getBotName(), chatbotProperties.getBotAvatar(), chatbotProperties.getMinApiVersion(), null, null);
+        context.setMessageState(MessageState.NEW);
         MessageRequest messageRequest = messageService.getMessageRequest(context);
         viberWebClient.sendMessage(messageRequest);
         return null;
