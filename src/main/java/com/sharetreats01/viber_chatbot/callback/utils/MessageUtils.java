@@ -62,8 +62,8 @@ public class MessageUtils {
     }
 
     public String createReplyTrackingData(String trackingData, String state, String input) {
-        if (trackingData.split(DELIMITER).length == 2 && state.equals(PRODUCTS))
-            return trackingData + DELIMITER + state + INPUT_DELIMITER + input;
+//        if (trackingData.split(DELIMITER).length == 2 && state.equals(PRODUCTS))
+//            return trackingData + DELIMITER + state + INPUT_DELIMITER + input;
         return trackingData + INPUT_DELIMITER + input + DELIMITER + state;
     }
 }
